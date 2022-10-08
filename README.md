@@ -1,10 +1,11 @@
-# :pill: Covid 19 종합관리시스템 :pill:
+## :pill: Covid 19 종합관리시스템 :pill:
 
 ### Covid 19
 
 - 약 1300 개의 데이터, 88개의 PHP 코드로 구성
+  ![mainpage](img/mainpage.png)
 
-#### :kr: 정부
+#### :office: 정부
 
 - 코로나에 관한 종합적인 정보 제공 및 관리
 - 관리자 로그인 후 접속 가능
@@ -29,7 +30,16 @@
 
 ## Result
 
-- ppt 파일 참고
+자세한 내용은 ppt 파일 참고
+
+### 정부
+
+![government](img/government.png)
+
+### 경대병원
+
+![hospital](img/hopital_knu.png.png)
+![hospital](img/hopital_knu2.png)
 
 ## 추후 개선 방안
 
