@@ -32,13 +32,13 @@
 
 자세한 내용은 ppt 파일 참고
 
-### 정부
+### :office: 정부
 
 ![government](img/government.png)
 
-### 경대병원
+### :hospital: 경대병원
 
-![hospital](img/hopital_knu.png.png)
+![hospital](img/hopital_knu.png)
 ![hospital](img/hopital_knu2.png)
 
 ## 추후 개선 방안
