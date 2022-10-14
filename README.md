@@ -3,7 +3,7 @@
 ### Covid 19
 
 - 약 1300 개의 데이터, 88개의 PHP 코드로 구성
-<img src="img/mainpage.png" width="80%">
+  <img src="result_img/mainpage.png" width="80%">
 
 ### :office: 정부
 
@@ -26,7 +26,7 @@
 
 ## Database Modeling - ER Diagram
 
-<img src="img/er-diagram.png" width="80%">
+<img src="result_img/er-diagram.png" width="80%">
 
 ## Result
 
@@ -34,16 +34,16 @@
 
 ### :eyes: 로그인
 
-<img src="img/login.png" width="80%">
+<img src="result_img/login.png" width="80%">
 
 ### :office: 정부
 
-<img src="img/government.png" width="80%">
+<img src="result_img/government.png" width="80%">
 
 ### :hospital: 경대병원
 
-<img src="img/hopital_knu.png" width="80%">
-<img src="img/hopital_knu2.png" width="80%">
+<img src="result_img/hopital_knu.png" width="80%">
+<img src="result_img/hopital_knu2.png" width="80%">
 
 ## 추후 개선 방안
 
