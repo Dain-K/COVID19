@@ -22,7 +22,12 @@
         font-weight: 800;
     }
     .citizen{ border: 1px solid yellow; }
-    body { background-color:#F8F8F8;}
+    body { 
+        background-color:#F8F8F8;
+        margin: 0 auto;
+        position: relative;
+        align-items: center:
+    }
     .main-box{
         background-color: none;
         width: 900px;
@@ -58,6 +63,9 @@
         width: 80px;
         height: 30px;
     }
+    .register-btn {
+        margin: 0 auto;
+    }
     </style>
   </head>
   <body>
@@ -82,25 +90,24 @@
             }
     ?>
     <div class="main-box" style="padding-top: 20px;">
-    <table style="height: 100px;">
-        <tr>
-            <td>
-                <span class="sub-title">moderna table</span><br>
-                <span class="main-title">
-                    <span class="korea">모더나</span> 
-                    제약사 페이지
-                </span>
-            </td>
-        </tr>
-    </table>
-    <form action='main.php' method='POST'>
-        <input type='hidden' name='uid' value='<?php echo $username; ?>'/>
-        <button type='submit' class="btn">main page</button>
-    </form>
-        
+        <table style="height: 100px;">
+            <tr>
+                <td>
+                    <span class="sub-title">moderna table</span><br>
+                    <span class="main-title">
+                        <span class="korea">모더나</span> 
+                        제약사 페이지
+                    </span>
+                </td>
+            </tr>
+        </table>
+        <form action='main.php' method='POST'>
+            <input type='hidden' name='uid' value='<?php echo $username; ?>'/>
+            <button type='submit' class="btn">main page</button>
+        </form>
     </div>
 
-    </div>
+    <div>
         <form action='Moderna_add.php' method='POST'>
             <input type='hidden' name='uid' value='<?php echo $username; ?>'/>
             <button type='submit' class="register-btn">등록</button>
@@ -111,7 +118,7 @@
         </form>
     </div>
 
-    </div>
+    <div>
     <!-- <div class="vaccine-box" style="height: 200px;">
         <div class="title">사용가능한 백신 재고량</div> -->
         <table border=1>
