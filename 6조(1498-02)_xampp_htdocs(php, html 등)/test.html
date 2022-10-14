@@ -51,13 +51,6 @@
         margin: 0 auto;
         text-align: center;
     }
-    .btn {
-        background-color: #0050A2;
-        border: none;
-        color:white;
-        width: 80px;
-        height: 30px;
-    }
     </style>
   </head>
   <body>
@@ -84,19 +77,14 @@
     <div class="main-box" style="padding-top: 20px;">
     <table style="height: 100px;">
         <tr>
-            <td>
-                <span class="sub-title">moderna table</span><br>
-                <span class="main-title">
-                    <span class="korea">모더나</span> 
-                    제약사 페이지
-                </span>
-            </td>
+            <td><span class="sub-title">moderna table</span><br>
+        <span class="main-title"><span class="korea">모더나</span> 제약사 페이지</span></td>
         </tr>
     </table>
     <form action='main.php' method='POST'>
-        <input type='hidden' name='uid' value='<?php echo $username; ?>'/>
-        <button type='submit' class="btn">main page</button>
-    </form>
+            <input type='hidden' name='uid' value='<?php echo $username; ?>'/>
+            <button type='submit'>main page</button>
+        </form>
         
     </div>
 
