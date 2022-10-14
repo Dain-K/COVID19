@@ -2,9 +2,9 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
-    <title>경대병원</title> 
+    <title>대구병원</title> 
     <td width="1920dp" align='center'>
-          <img src="./banner.png" >
+          <img src="./banner_dg.png" >
         </td>
     <style>
         .citizen{
@@ -15,15 +15,7 @@
         }
         a{
             text-decoration: none;
-            color:white;
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 40px;
-        }
-
-        b{
-            text-decoration: none;
-            color:black;
+            color: white;
             font-size: 16px;
             font-weight: 700;
             line-height: 40px;
@@ -41,7 +33,7 @@
             cursor: pointer;
         }
         .btn:hover{
-            background-color: #da2128;
+            background-color: #04cf5c;
         }
         .button-box{
             width: 903px;
@@ -57,26 +49,34 @@
             color: #717171;
             font-weight: 800;
             font-size: 19px;
+            /*padding-left: 100px;*/
             padding-top: 30px;
             padding-bottom: 10px;
         }
         .hospital_info-box{
             width: 900px;
+            height: 160px;
             margin: 0 auto;
             background-color: white;
         }
         .hospital_info-box_list{
             width: 900px;
+            height: 600px;
             margin: 0 auto;
             background-color: white;
         }
         .hospital_info-table{
             text-align: center;
             margin: 0 auto;
+            border-collapse: collapse;
         }
+        .hospital_info-table  td{
+            border-left: 3px solid #F7FAFE;
+            border-bottom: 3px solid #F7FAFE;
+        } 
          .hospital_info-table .hospital_info-th td{
             color: white;
-            background-color:#b48b59;
+            background-color:#04cf5c;
         } 
         .hospital_info-table td:nth-child(1){width: 40px;} 
         .hospital_info-table td:nth-child(2){width: 140px;} 
@@ -84,6 +84,13 @@
         .hospital_info-table td:nth-child(4){width: 70px;} 
         .hospital_info-table td:nth-child(7){width: 70px;} 
         .hospital_info-table td:nth-child(8){width: 70px;} 
+        .edit{
+            height: 40px;
+            width: 40px;
+            color: white;
+            background-color:#04cf5c;
+            border: none;
+        }
         .empty{
             width: 900px;
             height: 20px;
@@ -121,46 +128,43 @@
         .citizen-table td{
             border: 1px solid black;
         }
-        .edit{
-            height: 40px;
-            width: 40px;
-            color: white;
-            background-color:#CEA87D;
-            border: none;
-        }
+
+
 
     </style>
   </head>
+
   <body>
-    <div class="main-box">
-    <table class="button-box">
+  <?php$username=$_POST['uid'];?>
+  <div class="main-box">
+  <table class="button-box">
             <tr>
                 <td>
-                    <form action="new_knu_hospital_mainpage.php" method="POST">
+                    <form action="new_dg_hospital_mainpage.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn">경대병원</button>
+                        <button class="btn">대구병원</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_vaccinate_list.php" method="POST">
+                    <form action="new_dg_hospital_vaccinate_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn" style="background-color: #da2128" >백신접종리스트</button>
+                        <button class="btn" style="background-color: #029341">백신접종리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_vac_list.php" method="POST">
+                    <form action="new_dg_hospital_vac_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
                         <button class="btn">백신 리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_patients_list.php" method="POST">
+                    <form action="new_dg_hospital_patients_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn">환자 리스트</button>
+                        <button class="btn" >환자 리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_testers_list.php" method="POST">
+                    <form action="new_dg_hospital_testers_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
                         <button class="btn">검진자 리스트</button>
                     </form>
@@ -170,15 +174,15 @@
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
                         <button class="btn">로그인 페이지</button>
                     </form>
-                </td>      
+                </td>
+            
             </tr>
         </table>
     </div>
 
 
-
     <div class="hospital_info-box_list">
-   <div align="center"class="title">백신 1차/2차 리스트 </div>
+   <div align="center"class="title">백신 접종 리스트 </div>
    <div style="margin: 0 auto; width: 870px; max-height: 500px; overflow-y: scroll;">
    <table align="center"class="hospital_info-table">
         <thead class="hospital_info-th">
@@ -200,7 +204,7 @@
          <?php
                 $username=$_POST['uid'];
                 $jb_conn = mysqli_connect("localhost:3306", "root", "1234", "newcovid19db") or die("Error!!:: Covid-19 DataBase 접속 실패!!");
-                $jb_1st_sql="SELECT * FROM vaccines, vaccinate WHERE Owned = '경대병원' AND (vaccines.SerialNo = vaccinate.1st_Vno OR vaccines.SerialNo = vaccinate.2nd_Vno)";                
+                $jb_1st_sql="SELECT * FROM vaccines, vaccinate WHERE Owned = '대구병원' AND (vaccines.SerialNo = vaccinate.1st_Vno OR vaccines.SerialNo = vaccinate.2nd_Vno)";                
 
                 $jb_possible_result = mysqli_query( $jb_conn, $jb_1st_sql );                
                 $num=1;
@@ -238,18 +242,26 @@
                     }
                     if($row_possible['2nd_date'] == NULL){
                         $a = $row_possible['1st_date'];
-                        $sql = "SELECT DATE_ADD('$a', INTERVAL 21 DAY) AS 2nd_plan_date FROM vaccines, vaccinate
-                                WHERE Owned = '경대병원' AND (vaccines.SerialNo = vaccinate.1st_Vno OR vaccines.SerialNo = vaccinate.2nd_Vno);";
+                        $sql = "SELECT DATE_ADD('$a', INTERVAL 28 DAY) AS 2nd_plan_date FROM vaccines, vaccinate
+                                WHERE Owned = '대구병원' AND (vaccines.SerialNo = vaccinate.1st_Vno OR vaccines.SerialNo = vaccinate.2nd_Vno);";
                         $result = mysqli_query( $jb_conn, $sql );
                         $row = mysqli_fetch_array($result);
-                        echo "<TD>", $row[0], "</TD>";
+                        $sql = "SELECT CURDATE() AS D";
+                        $result = mysqli_query( $jb_conn, $sql );
+                        $D = mysqli_fetch_array($result);
+                        if($row[0] > $D[0]){
+                            echo "<TD>", $row[0], "</TD>";
+                        }
+                        else{
+                            echo "<TD>", "예정일 재입력", "</TD>";
+                        }
                     }
                     else{
                         echo "<TD>", $row_possible['2nd_date'], "</TD>";
                     }
                     echo "<TD>", $row_possible['2nd_hosp'], "</TD>";
                     echo "<TD>
-                    <form action='new_knu_hospital_vaccinate_update.php' method='POST'>
+                    <form action='new_dg_hospital_vaccinate_update.php' method='POST'>
                     <input type='hidden' name='Cssn' value='$row_possible[Cssn]'/>
                     <input type='hidden' name='uid' value='$username'/>
                     <button type='submit' class='edit'>수정</button>
@@ -262,9 +274,8 @@
                 ?>
         </tbody>
     </table>
-    </div>
-    <div class="empty"></div>
-    <div class="empty"></div>
+            </div>
+
 
                 
 

@@ -212,15 +212,15 @@
     <META http-equiv="content-type" content="text/html; charset=utf-8">
     </HEAD>
     <BODY>
-        <h1>회원 정보 수정</h1>
+        <h1>환자 정보 수정</h1>
         <FORM METHOD="post" ACTION="new_knu_hospital_patients_update_result.php">
-            <h3>*주의* 값이 공백이여야 할 경우에는 삭제 후 재생성 하세요</h3>
+            <!-- <h3>*주의* 값이 공백이여야 할 경우에는 삭제 후 재생성 하세요</h3> -->
             주민번호:<INPUT TYPE="text" NAME="Cssn" VALUE=<?php echo $Cssn ?>><br> 
             환자코드:<INPUT TYPE="text" NAME="Hcode" VALUE=<?php echo $Hcode ?>><br> 
             건물동:<INPUT TYPE="text" NAME="Building" VALUE=<?php echo $Building ?>><br>
             입원호실:<INPUT TYPE="text" NAME="Room" VALUE=<?php echo $Room ?>><br>
-            입원일:<INPUT TYPE="text" NAME="Hdate" VALUE=<?php echo $Hdate ?>><br>
-            퇴원일:<INPUT TYPE="text" NAME="Odate" VALUE=<?php echo $Odate ?>><br>
+            입원일:<INPUT TYPE="date" NAME="Hdate" VALUE=<?php echo $Hdate ?>><br>
+            퇴원일:<INPUT TYPE="date" NAME="Odate" VALUE=<?php echo $Odate ?>><br>
             보호자연락처:<INPUT TYPE="text" NAME="Tel_nok" VALUE=<?php echo $Tel_nok ?>><br>
 
             <BR><BR>

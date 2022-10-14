@@ -73,7 +73,7 @@
 
         }
 
-        .hospital_info-table td:nth-child(11){
+        .hospital_info-table td:nth-child(7){
             text-align: center;
             font-weight: 800;
             background-color:#04cf5c;
@@ -81,7 +81,7 @@
         } 
          .hospital_info-table .hospital_info-th td{
             width:  160px;
-            height: 100px;
+            height: 40px;
             color: white;
             background-color:#04cf5c;
         } 
@@ -122,16 +122,6 @@
         .citizen-table td{
             border: 1px solid black;
         }
-        
-        .input_btn {
-            background-color:#04cf5c;
-            width: 150px;
-            height: 38px;
-            border-radius: 3px;
-            color:white;
-            font-size: 16px;
-            font-weight: 700;
-             }
 
 
 
@@ -151,7 +141,7 @@
                 <td>
                     <form action="new_dg_hospital_vaccinate_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn" style="background-color: #029341">백신접종리스트</button>
+                        <button class="btn">백신접종리스트</button>
                     </form>
                 </td>
                 <td>
@@ -169,7 +159,7 @@
                 <td>
                     <form action="new_dg_hospital_testers_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn">검진자 리스트</button>
+                        <button class="btn" style="background-color: #029341">검진자 리스트</button>
                     </form>
                 </td>
                 <td>
@@ -183,19 +173,18 @@
         </table>
     </div>
 
- 
-<div align = 'center'>
+    <div align = 'center'>
 <?php
-        $username=$_POST['uid'];
-        $Cssn=$_POST['Cssn'];
+    $username=$_POST['uid'];
+    $Cssn=$_POST['Cssn'];
         $con=mysqli_connect("localhost:3306", "root", "1234", "newcovid19db") or die("Error!!:: Covid-19 DataBase 접속 실패!!");
-        $sql="SELECT * FROM vaccines, vaccinate WHERE Owned = '대구병원' AND (vaccines.SerialNo = vaccinate.1st_Vno OR vaccines.SerialNo = vaccinate.2nd_Vno) AND Cssn='$Cssn'";
+        $sql="SELECT * FROM newcovid19db.testers, newcovid19db.citizens WHERE Testhospital= '대구병원' AND  testers.Cssn=citizens.ssn AND Cssn='$Cssn'";
 
         $ret=mysqli_query($con,$sql);
         if($ret){
             $count=mysqli_num_rows($ret);
             if($count==0){
-                echo $_GET['Cssn']."주민번호의 접종자가 없음!"."<br>";
+                echo $Cssn."주민번호의 검진자가 없음!"."<br>";
                 echo "<br> <a href='new_dg_hospital_mainpage.php'> <--초기화면</a> ";
                 exit();
             }
@@ -209,35 +198,28 @@
 
         $row=mysqli_fetch_array($ret);
         $Cssn=$row["Cssn"];
-        $first_Vno=$row["1st_Vno"];
-        $first_date=$row["1st_date"];
-        $first_hosp=$row["1st_hosp"];
-        $second_Vno=$row["2nd_Vno"];
-        $second_date=$row["2nd_date"];
-        $second_hosp=$row["2nd_hosp"];
-        $MfgCo=$row["MfgCo"];
+        $Testdate=$row["Testdate"];
+        $Testnum=$row["Testnum"];
+        $Testhospital=$row["Testhospital"];
+        
     ?>
 
-    <HTML>
+<HTML>
     <HEAD>
     <META http-equiv="content-type" content="text/html; charset=utf-8">
     </HEAD>
     <BODY>
-        <h1>회원 정보 수정</h1>
-        <FORM METHOD="post" ACTION="new_dg_hospital_vaccinate_update_result.php">
+        <h1>검진자 정보 수정</h1>
+        <FORM METHOD="post" ACTION="new_dg_hospital_testers_update_result.php">
+            
             주민번호:<INPUT TYPE="text" NAME="Cssn" VALUE=<?php echo $Cssn ?>><br> 
-            1차백신생산번호:<INPUT TYPE="text" NAME="1st_Vno" VALUE=<?php echo $first_Vno ?>><br> 
-           1차접종일:<INPUT TYPE="text" NAME="1st_date" VALUE=<?php echo $first_date ?>><br>
-            1차접종병원:<INPUT TYPE="text" NAME="1st_hosp" VALUE=<?php echo $first_hosp ?>><br>
-            2차백신생산번호:<INPUT TYPE="text" NAME="2nd_Vno" VALUE=<?php echo $second_Vno ?>><br>
-            2차접종일:<INPUT TYPE="text" NAME="2nd_date" VALUE=<?php echo $second_date ?>><br>
-            2차접종병원:<INPUT TYPE="text" NAME="2nd_hosp" VALUE=<?php echo $second_hosp ?>><br>
-            백신제조사:<INPUT TYPE="text" NAME="MfgCo" VALUE=<?php echo $MfgCo ?>><br>
-
+            검진일:<INPUT TYPE="date" NAME="Testdate" VALUE=<?php echo $Testdate ?>><br>
+            검진횟수:<INPUT TYPE="text" NAME="Testnum" VALUE=<?php echo $Testnum ?>><br>
             <BR><BR>
             <input type="hidden" name="uid" value="<?=$username?>"/>
-            <INPUT TYPE="submit" VALUE="백신접종 정보 수정" class = 'input_btn'>
+            <INPUT TYPE="submit" VALUE="검진자 정보 수정" class = 'input_btn'>
     </FORM>
     </div>
-    <body>
+    </body>
     </html>
+

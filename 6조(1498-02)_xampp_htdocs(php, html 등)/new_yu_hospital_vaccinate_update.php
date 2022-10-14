@@ -2,9 +2,9 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
-    <title>경대병원</title> 
+    <title>영대병원</title> 
     <td width="1920dp" align='center'>
-          <img src="./banner.png" >
+          <img src="./banner_yu.png" >
         </td>
     <style>
         .citizen{
@@ -33,7 +33,7 @@
             cursor: pointer;
         }
         .btn:hover{
-            background-color: #da2128;
+            background-color: #0272BF;
         }
         .button-box{
             width: 903px;
@@ -77,7 +77,7 @@
             width:  160px;
             height: 40px;
             color: white;
-            background-color:#b48b59;
+            background-color:#0272BF;
         } 
         .empty{
             width: 900px;
@@ -118,8 +118,8 @@
         }
 
         .input_btn {
-            background-color:red;
-            width: 145px;
+            background-color:#0272BF;
+            width: 150px;
             height: 38px;
             border-radius: 3px;
             color:white;
@@ -135,31 +135,31 @@
   <table class="button-box">
             <tr>
                 <td>
-                    <form action="new_knu_hospital_mainpage.php" method="POST">
+                    <form action="new_yu_hospital_mainpage.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn">경대병원</button>
+                        <button class="btn">영대병원</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_vaccinate_list.php" method="POST">
+                    <form action="new_yu_hospital_vaccinate_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn" style="background-color: #da2128">백신접종리스트</button>
+                        <button class="btn" style="background-color: #0272BF" >백신접종리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_vac_list.php" method="POST">
+                    <form action="new_yu_hospital_vac_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
                         <button class="btn">백신 리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_patients_list.php" method="POST">
+                    <form action="new_yu_hospital_patients_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn">환자 리스트</button>
+                        <button class="btn" >환자 리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_testers_list.php" method="POST">
+                    <form action="new_yu_hospital_testers_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
                         <button class="btn">검진자 리스트</button>
                     </form>
@@ -176,22 +176,24 @@
  
 <div align = 'center'>
 <?php
+        $username=$_POST['uid'];
+        $Cssn=$_POST["Cssn"];
         $con=mysqli_connect("localhost:3306", "root", "1234", "newcovid19db") or die("Error!!:: Covid-19 DataBase 접속 실패!!");
-        $sql="SELECT * FROM vaccines, vaccinate WHERE Owned = '경대병원' AND (vaccines.SerialNo = vaccinate.1st_Vno OR vaccines.SerialNo = vaccinate.2nd_Vno) AND Cssn='".$_GET['Cssn']."'";
+        $sql="SELECT * FROM vaccines, vaccinate WHERE Owned = '영대병원' AND (vaccines.SerialNo = vaccinate.1st_Vno OR vaccines.SerialNo = vaccinate.2nd_Vno) AND Cssn='$Cssn';";
 
         $ret=mysqli_query($con,$sql);
         if($ret){
             $count=mysqli_num_rows($ret);
             if($count==0){
                 echo $_GET['Cssn']."주민번호의 접종자가 없음!"."<br>";
-                echo "<br> <a href='new_knu_hospital_mainpage.php'> <--초기화면</a> ";
+                echo "<br> <a href='new_yu_hospital_mainpage.php'> <--초기화면</a> ";
                 exit();
             }
         }
         else{
             echo "데이터 조회 실패!"."<br>";
             echo "실패원인: ".mysqli_error($con);
-            echo "<br><a href='new_knu_hospital_mainpage.php'> <--초기화면</a>";
+            echo "<br><a href='new_yu_hospital_mainpage.php'> <--초기화면</a>";
             exit();
         }
 
@@ -211,19 +213,44 @@
     <META http-equiv="content-type" content="text/html; charset=utf-8">
     </HEAD>
     <BODY>
-        <h1>회원 정보 수정</h1>
-        <FORM METHOD="post" ACTION="new_knu_hospital_vaccinate_update_result.php">
+        <h1>접종 정보 수정</h1>
+        <FORM METHOD="post" ACTION="new_yu_hospital_vaccinate_update_result.php">
             주민번호:<INPUT TYPE="text" NAME="Cssn" VALUE=<?php echo $Cssn ?>><br> 
             1차백신생산번호:<INPUT TYPE="text" NAME="1st_Vno" VALUE=<?php echo $first_Vno ?>><br> 
-           1차접종일:<INPUT TYPE="text" NAME="1st_date" VALUE=<?php echo $first_date ?>><br>
-            1차접종병원:<INPUT TYPE="text" NAME="1st_hosp" VALUE=<?php echo $first_hosp ?>><br>
+            1차접종일:<INPUT TYPE="date" NAME="1st_date" VALUE=<?php echo $first_date ?>><br>
+            <!-- 1차접종병원:<INPUT TYPE="text" NAME="1st_hosp" VALUE=<?php echo $first_hosp ?>><br> -->
+            <td class="first"><span>1차접종병원:</span></td>
+                        <td>
+                            <select name="1st_hosp" required>
+                                <option value="경대병원" >경대병원</option>
+                                <option value="영대병원" >영대병원</option>
+                                <option value="대구병원" >대구병원</option>
+                            </select>
+                        </td><br>
             2차백신생산번호:<INPUT TYPE="text" NAME="2nd_Vno" VALUE=<?php echo $second_Vno ?>><br>
-            2차접종일:<INPUT TYPE="text" NAME="2nd_date" VALUE=<?php echo $second_date ?>><br>
-            2차접종병원:<INPUT TYPE="text" NAME="2nd_hosp" VALUE=<?php echo $second_hosp ?>><br>
-            백신제조사:<INPUT TYPE="text" NAME="MfgCo" VALUE=<?php echo $MfgCo ?>><br>
+            2차접종일:<INPUT TYPE="date" NAME="2nd_date" VALUE=<?php echo $second_date ?>><br>
+            <!-- 2차접종병원:<INPUT TYPE="text" NAME="2nd_hosp" VALUE=<?php echo $second_hosp ?>><br> -->
+            <td class="first"><span>2차접종병원:</span></td>
+                        <td>
+                            <select name="2nd_hosp" required>
+                                <option value="경대병원" >경대병원</option>
+                                <option value="영대병원" >영대병원</option>
+                                <option value="대구병원" >대구병원</option>
+                            </select>
+                        </td><br>
+            <!-- 백신제조사:<INPUT TYPE="text" NAME="MfgCo" VALUE=<?php echo $MfgCo ?>><br> -->
+            <td class="first"><span>제조사:</span></td>
+                        <td>
+                            <select name="MfgCo" required>
+                                <option value="Moderna" >Moderna</option>
+                                <option value="Pfizer" >Pfizer</option>
+                            </select>
+                        </td><br>
 
             <BR><BR>
-            <INPUT TYPE="submit" VALUE="백신접종 정보 수정" class = 'input_btn'>
+            <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
+            <button class="btn">환자정보 수정</button>
+
     </FORM>
     </div>
     <body>

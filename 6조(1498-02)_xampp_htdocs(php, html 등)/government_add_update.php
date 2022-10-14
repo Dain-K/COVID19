@@ -4,28 +4,28 @@
     <meta charset="utf-8">
     <title>Update Employee</title>
     <style>
-        body { 
-            background-color:#F8F8F8; 
-        }
-        .main-box{
-            background-color: none;
-            width: 900px;
-            margin: 0 auto;
-        }
-        .box{
-            background-color: white;
-            width: 900px;
-            margin-top: 20px;
-            margin: 0 auto;
-            text-align: center;
-        }
-        .main-table{
-          text-align: center;
+      body { 
+          background-color:#F8F8F8; 
+      }
+      .main-box{
+          background-color: none;
+          width: 900px;
           margin: 0 auto;
-        }
-        .text-box{
-          font-weight: 800;
-        }
+      }
+      .box{
+          background-color: white;
+          width: 900px;
+          margin-top: 20px;
+          margin: 0 auto;
+          text-align: center;
+      }
+      .main-table{
+        text-align: center;
+        margin: 0 auto;
+      }
+      .text-box{
+        font-weight: 800;
+      }
     </style>
   </head>
   <body>

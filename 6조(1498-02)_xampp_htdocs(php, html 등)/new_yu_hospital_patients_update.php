@@ -2,9 +2,9 @@
 <html lang="ko">
   <head>
     <meta charset="utf-8">
-    <title>검진자리스트수정</title> 
+    <title>영대병원</title> 
     <td width="1920dp" align='center'>
-          <img src="./banner.png" >
+          <img src="./banner_yu.png" >
         </td>
     <style>
         .citizen{
@@ -16,14 +16,6 @@
         a{
             text-decoration: none;
             color: white;
-            font-size: 16px;
-            font-weight: 700;
-            line-height: 40px;
-        }
-
-        .list_black{
-            text-decoration: none;
-            color: black;
             font-size: 16px;
             font-weight: 700;
             line-height: 40px;
@@ -41,7 +33,7 @@
             cursor: pointer;
         }
         .btn:hover{
-            background-color: #da2128;
+            background-color: #0272BF;
         }
         .button-box{
             width: 903px;
@@ -62,14 +54,14 @@
             padding-bottom: 10px;
         }
         .hospital_info-box{
-            width: 1500px;
+            width: 900px;
             height:250px;
             margin: 0 auto;
             background-color: white;
         }
         .hospital_info-box_list{
             width: 900px;
-            height:2000px;
+            height:800px;
             margin: 0 auto;
             background-color: white;
         }
@@ -77,28 +69,15 @@
             text-align: center;
             padding-left: 100px;
             padding-right: 100px;
+            font-weight: 800;
 
-        }
-        
-        .hospital_info-table :nth-child(7){
-            text-align: center;
-            background-color: #cea87d;
-        
         }
 
          .hospital_info-table .hospital_info-th td{
-            width:  300px;
+            width:  160px;
             height: 40px;
             color: white;
             background-color:#b48b59;
-        } 
-        
-        .hospital_info-table .hospital_info-th td :nth-child(9){
-            width:  300px;
-            height: 40px;
-            color: yellow;
-            background-color:yellow;
-
         } 
         .empty{
             width: 900px;
@@ -123,7 +102,7 @@
             padding-bottom: 30px;
             text-align: center;
         }
-        .testers-table td{
+        .tester-table td{
             border: 1px solid black;
         }
         .confirmed-table td{
@@ -138,42 +117,51 @@
             border: 1px solid black;
         }
 
-
+        .input_btn {
+            background-color:#0272BF;
+            width: 150px;
+            height: 38px;
+            border-radius: 3px;
+            color:white;
+            font-size: 16px;
+            font-weight: 700;
+             }
 
     </style>
   </head>
+
   <body>
-    <div class="main-box">
-    <table class="button-box">
+  <div class="main-box">
+  <table class="button-box">
             <tr>
                 <td>
-                    <form action="new_knu_hospital_mainpage.php" method="POST">
+                    <form action="new_yu_hospital_mainpage.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn">경대병원</button>
+                        <button class="btn">영대병원</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_vaccinate_list.php" method="POST">
+                    <form action="new_yu_hospital_vaccinate_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn">백신접종리스트</button>
+                        <button class="btn" >백신접종리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_vac_list.php" method="POST">
+                    <form action="new_yu_hospital_vac_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
                         <button class="btn">백신 리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_patients_list.php" method="POST">
+                    <form action="new_yu_hospital_patients_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn">환자 리스트</button>
+                        <button class="btn" style="background-color: #0272BF">환자 리스트</button>
                     </form>
                 </td>
                 <td>
-                    <form action="new_knu_hospital_testers_list.php" method="POST">
+                    <form action="new_yu_hospital_testers_list.php" method="POST">
                         <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-                        <button class="btn" style="background-color: #da2128" >검진자 리스트</button>
+                        <button class="btn">검진자 리스트</button>
                     </form>
                 </td>
                 <td>
@@ -185,54 +173,66 @@
             </tr>
         </table>
     </div>
-
-    <div align = 'center'>
+ 
+<div align = 'center'>
 <?php
-        $username=$_POST['uid'];
-        $Cssn = $_POST['Cssn'];
+    $username=$_POST['uid'];
+    $Cssn=$_POST['Cssn'];
         $con=mysqli_connect("localhost:3306", "root", "1234", "newcovid19db") or die("Error!!:: Covid-19 DataBase 접속 실패!!");
-        $sql="SELECT * FROM newcovid19db.testers, newcovid19db.citizens WHERE Testhospital= '경대병원' AND  testers.Cssn=citizens.ssn AND Cssn='$Cssn'";
+        $sql="SELECT * FROM newcovid19db.patients,newcovid19db.citizens,newcovid19db.patients_details where Hospname='영대병원'AND patients.Cssn=citizens.ssn AND patients_details.Hcode=patients.Hcode AND Cssn='$Cssn'";
 
         $ret=mysqli_query($con,$sql);
         if($ret){
             $count=mysqli_num_rows($ret);
             if($count==0){
-                echo $Cssn."주민번호의 검진자가 없음!"."<br>";
-                echo "<br> <a href='new_knu_hospital_mainpage.php'> <--초기화면</a> ";
+                echo $Cssn."주민번호의 환자가 없음!"."<br>";
+                echo "<br><form action='new_yu_hospital_mainpage.php' method='POST'>
+                <input type='hidden' name='uid' value='$username'/>
+                <button type='submit'>메인페이지</button>
+            </form>";
                 exit();
             }
         }
         else{
             echo "데이터 조회 실패!"."<br>";
             echo "실패원인: ".mysqli_error($con);
-            echo "<br><a href='new_knu_hospital_mainpage.php'> <--초기화면</a>";
+            echo "<br><form action='new_yu_hospital_mainpage.php' method='POST'>
+            <input type='hidden' name='uid' value='$username'/>
+            <button type='submit'>메인페이지</button>
+        </form>";
             exit();
         }
 
         $row=mysqli_fetch_array($ret);
         $Cssn=$row["Cssn"];
-        $Testdate=$row["Testdate"];
-        $Testnum=$row["Testnum"];
-        $Testhospital=$row["Testhospital"];
-        
+        $Hospname=$row["Hospname"];
+        $Building=$row["Building"];
+        $Hcode=$row["Hcode"];
+        $Room=$row["Room"];
+        $Hdate=$row["Hdate"];
+        $Odate=$row["Odate"];
+        $Tel_nok=$row["Tel_nok"];
     ?>
 
-<HTML>
+    <HTML>
     <HEAD>
     <META http-equiv="content-type" content="text/html; charset=utf-8">
     </HEAD>
     <BODY>
-        <h1>검진자 정보 수정</h1>
-        <FORM METHOD="post" ACTION="new_knu_hospital_testers_update_result.php">
-            
+        <h1>환자 정보 수정</h1>
+        <FORM METHOD="post" ACTION="new_yu_hospital_patients_update_result.php">
             주민번호:<INPUT TYPE="text" NAME="Cssn" VALUE=<?php echo $Cssn ?>><br> 
-            검진일:<INPUT TYPE="text" NAME="Testdate" VALUE=<?php echo $Testdate ?>><br>
-            검진횟수:<INPUT TYPE="text" NAME="Testnum" VALUE=<?php echo $Testnum ?>><br>
+            환자코드:<INPUT TYPE="text" NAME="Hcode" VALUE=<?php echo $Hcode ?>><br> 
+            건물동:<INPUT TYPE="text" NAME="Building" VALUE=<?php echo $Building ?>><br>
+            입원호실:<INPUT TYPE="text" NAME="Room" VALUE=<?php echo $Room ?>><br>
+            입원일:<INPUT TYPE="date" NAME="Hdate" VALUE=<?php echo $Hdate ?>><br>
+            퇴원일:<INPUT TYPE="date" NAME="Odate" VALUE=<?php echo $Odate ?>><br>
+            보호자연락처:<INPUT TYPE="text" NAME="Tel_nok" VALUE=<?php echo $Tel_nok ?>><br>
+
             <BR><BR>
-            <input type="hidden" name="uid" value="<?=$_POST['uid']?>"/>
-            <INPUT TYPE="submit" VALUE="검진자 정보 수정" class = 'input_btn'>
+            <input type="hidden" name="uid" value="<?php echo $username ?>"/>
+            <INPUT TYPE="submit" VALUE="환자정보 수정" class = 'input_btn'>
     </FORM>
     </div>
-    </body>
+    <body>
     </html>
-
